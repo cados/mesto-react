@@ -19,13 +19,13 @@ function App() {
   });
 
   function handleEditProfileClick() {
-    setEditProfilePopupOpenClose(!isEditProfilePopupOpen);
+    setEditProfilePopupOpenClose(true);
   }
   function handleAddPlaceClick() {
-    setAddCardPopupOpenClose(!isAddCardPopupOpen);
+    setAddCardPopupOpenClose(true);
   }
   function handleEditAvatarClick() {
-    setEditAvatarPopupOpenClose(!isEditAvatarPopupOpen);
+    setEditAvatarPopupOpenClose(true);
   }
 
   function handleImagePopupOpen(card) {
