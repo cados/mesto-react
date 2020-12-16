@@ -1,7 +1,12 @@
 import React from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card(props) {
-  const [liked, setLiked] = React.useState(false);
+  const currentUser = React.useContext(CurrentUserContext);
+  const [liked, setLiked] = React.useState(
+    props.card.likes.some((i) => i._id === currentUser._id)
+  );
+  const isOwn = props.card.owner._id === currentUser._id;
 
   function handleClick() {
     props.onCardClick(props.card);
@@ -9,11 +14,21 @@ function Card(props) {
 
   function likeClick() {
     setLiked(!liked);
+    props.onCardLike(props.card);
   }
+
+  function handleDeleteClick() {
+    props.onCardDelete(props.card);
+  }
+
   return (
     <>
       <li className="card">
-        <button className="card__trash" type="button"></button>
+        <button
+          onClick={handleDeleteClick}
+          className={`card__trash ${isOwn ? "card__trash_active" : ""}`}
+          type="button"
+        />
         <img
           className="card__images"
           onClick={handleClick}

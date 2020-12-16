@@ -31,14 +31,17 @@ class Api {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
     }).then((res) => {
       return this._responseResult(res);
     });
   }
 
-  deleteCard(id) {
-    return fetch(`${this._url}/cards/${id}`, {
+  deleteCard(data) {
+    return fetch(`${this._url}/cards/${data}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -55,8 +58,17 @@ class Api {
       return this._responseResult(res);
     });
   }
-  addLike(id) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
+
+  changeLikeCardStatus(card, isLikes) {
+    if (isLikes) {
+      return this.addLike(card);
+    } else {
+      return this.deleteLike(card);
+    }
+  }
+
+  addLike(data) {
+    return fetch(`${this._url}/cards/likes/${data}`, {
       method: "PUT",
       headers: this._headers,
     }).then((res) => {
@@ -64,8 +76,8 @@ class Api {
     });
   }
 
-  deleteLike(id) {
-    return fetch(`${this._url}/cards/likes/${id}`, {
+  deleteLike(data) {
+    return fetch(`${this._url}/cards/likes/${data}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
