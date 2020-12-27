@@ -6,6 +6,7 @@ function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
   return (
     <>
+      <div className={`loading ${props.loader && "hide"}`}></div>
       <section className="profile">
         <div className="profile__item">
           <div className="profile__item-container">
