@@ -23,6 +23,7 @@ function App() {
   });
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+  const [userInfoGet, setUserInfoGet] = React.useState(false);
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
       .then(([userInfo, cardList]) => {
         setCurrentUser(userInfo);
         setCards(cardList);
+        setUserInfoGet(true);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -115,7 +117,7 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
         <Main
-          //loader={userInfoGet}
+          loader={userInfoGet}
           onCardClick={handleImagePopupOpen}
           onEditProfile={handleEditProfileClick}
           onAddCard={handleAddPlaceClick}
